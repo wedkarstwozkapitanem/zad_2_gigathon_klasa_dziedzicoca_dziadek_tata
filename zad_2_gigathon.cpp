@@ -12,7 +12,7 @@ public:
     } dane_osobowe;
 
     Dziadek() {};
-
+   
     Dziadek(std::string imie, int wiek) {
         this->dane_osobowe.imie = imie;
         this->dane_osobowe.wiek = wiek;
@@ -20,13 +20,14 @@ public:
     void powitanie() {
         cout << "Witaj! Nazywam się " << this->dane_osobowe.imie << " " << this->dane_osobowe.nazwisko << ". Mam " << dane_osobowe.wiek << " lat.";
     }
-
-    void zainteresowania() {
+    
+    ~Dziadek() = default;
+    virtual void zainteresowania() {
         cout << "Interesuję się: ";
         for (auto i : zainteresowania_jakie) cout << i << " ";
         cout << ".";
     }
-private:
+protected:
     string zainteresowania_jakie[2] = { "wędkarstwem","ogrodnictwem" };
    
 };
@@ -34,11 +35,13 @@ private:
 class Tata : public Dziadek {
 public:
     Tata(string imie, int wiek) : Dziadek(imie, wiek) {};
-    void zainteresowania() {
+    ~Tata() = default;
+    void zainteresowania() override {
         cout << "Interesuję się: ";
         for (auto i : zainteresowania_jakie) cout << i << " ";
+        cout << ".";
     }
-private:
+protected:
     string zainteresowania_jakie[2] = { "karate","blogowaniem" };
 };
 
